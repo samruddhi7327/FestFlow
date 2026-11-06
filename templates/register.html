@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="hero">
+    <h1>📝 Event Registration</h1>
+    <p>Register students for exciting college events!</p>
+</section>
+
+<h2>Register for an Event</h2>
+
+<form method="POST" action="{{ url_for('register') }}" style="max-width:650px; margin:25px 0;">
+
+    <label for="student_id">Select Student</label>
+    <select name="student_id" id="student_id" required>
+        <option value="">-- Choose Student --</option>
+        {% for s in students %}
+        <option value="{{ s.student_id }}">
+            {{ s.student_name }} (ID: {{ s.student_id }})
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="event_id">Select Event</label>
+    <select name="event_id" id="event_id" required>
+        <option value="">-- Choose Event --</option>
+        {% for e in events %}
+        <option value="{{ e.event_id }}">
+            {{ e.event_name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn">
+        Register Student →
+    </button>
+</form>
+
+<h2>📋 Registration Records</h2>
+
+<div style="overflow-x:auto;">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Event</th>
+                <th>Registration Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for r in registrations %}
+            <tr>
+                <td>{{ r.registration_id }}</td>
+                <td>{{ r.student_name }}</td>
+                <td>{{ r.event_name }}</td>
+                <td>{{ r.registration_date }}</td>
+                <td>{{ r.registration_status }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No registrations found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
