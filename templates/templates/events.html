@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>🎉 Discover Campus Events</h1>
+    <p>Find your passion. Join the excitement. Make memories!</p>
+</section>
+
+<h2>✨ Explore All Events</h2>
+
+<section class="grid">
+
+    {% for event in events %}
+
+    <div class="card event-card">
+
+        <div style="font-size:40px;">
+            {% if 'Coding' in event.event_name %}
+            💻
+            {% elif 'Dance' in event.event_name %}
+            💃
+            {% elif 'Singing' in event.event_name %}
+            🎤
+            {% elif 'Robotics' in event.event_name %}
+            🤖
+            {% else %}
+            🎊
+            {% endif %}
+        </div>
+
+        <h3>{{ event.event_name }}</h3>
+
+        <p>
+            📅 <strong>Date:</strong>
+            {{ event.event_date }}
+        </p>
+
+        <p>
+            🕒 <strong>Time:</strong>
+            {{ event.event_time }}
+        </p>
+
+        <p>
+            📍 <strong>Venue:</strong>
+            {{ event.venue_name }}
+        </p>
+
+        <p>
+            💰 <strong>Registration Fee:</strong>
+            ₹{{ event.registration_fee }}
+        </p>
+
+        <p>
+            👥 <strong>Maximum Participants:</strong>
+            {{ event.max_participants }}
+        </p>
+        <p>
+            📝 <strong>Registered Students:</strong>
+            {{ event.registered_count }}
+        </p>
+
+        <p>
+            🪑 <strong>Available Seats:</strong>
+            {{ event.available_seats }}
+        </p>
+        <a href="/register">
+            <button class="btn">Register for Event →</button>
+        </a>
+
+    </div>
+
+    {% else %}
+
+    <div class="card">
+        <h3>No Events Available</h3>
+        <p>Stay tuned! Exciting events are coming soon.</p>
+    </div>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}
