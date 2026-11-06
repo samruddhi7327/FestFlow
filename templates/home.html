@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Welcome Section -->
+<section class="hero">
+    <p>WELCOME TO FESTFLOW ✨</p>
+    <h1>One Campus. Endless Celebrations.</h1>
+    <p>
+        Discover exciting events, register for competitions
+        and celebrate your campus journey with us.
+    </p>
+
+    <a href="/events">
+        <button class="btn">Explore Events →</button>
+    </a>
+
+    <a href="/register">
+        <button class="btn">Register Now →</button>
+    </a>
+</section>
+
+<!-- Dashboard Statistics -->
+<h2>📊 Fest Overview</h2>
+
+<section class="grid">
+
+    <div class="card">
+        <div class="label">Total Students</div>
+        <div class="number">{{ stats.students }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Total Events</div>
+        <div class="number">{{ stats.events }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Registrations</div>
+        <div class="number">{{ stats.registrations }}</div>
+    </div>
+
+    <div class="card">
+        <div class="label">Pending Payments</div>
+        <div class="number">{{ stats.pending }}</div>
+    </div>
+
+</section>
+
+<!-- Quick Actions -->
+<h2>⚡ Quick Actions</h2>
+
+<section class="grid">
+
+    <div class="card">
+        <h3>🎉 Explore Events</h3>
+        <p>Discover upcoming college competitions and activities.</p>
+        <a href="/events"><button class="btn">View Events</button></a>
+    </div>
+
+    <div class="card">
+        <h3>📝 Register</h3>
+        <p>Participate in your favourite college events.</p>
+        <a href="/register"><button class="btn">Register Now</button></a>
+    </div>
+
+    <div class="card">
+        <h3>👩‍🎓 Students</h3>
+        <p>Explore the list of registered students.</p>
+        <a href="/students"><button class="btn">View Students</button></a>
+    </div>
+
+    <div class="card">
+        <h3>💳 Payments</h3>
+        <p>Check registration payment information.</p>
+        <a href="/payments"><button class="btn">View Payments</button></a>
+    </div>
+
+</section>
+
+<!-- Recent Event Activity -->
+<h2>🎭 Event Activity</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Registrations</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for r in recent %}
+        <tr>
+            <td>{{ r.event_name }}</td>
+            <td>{{ r.event_date }}</td>
+            <td>{{ r.registrations }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No events available currently.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
